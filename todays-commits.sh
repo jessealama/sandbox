@@ -9,11 +9,15 @@ for repo in $repos; do
     if [[ $? -eq "0" ]]; then
 	for commit in $commits; do
 	    msg=`git --git-dir=$path/.git diff-tree -s --pretty=%s $commit`;
-	    if [[ $msg = '' ]]; then
-		echo "<li><a href=\"https://github.com/jessealama/$name/$commit\"><em>(no message was supplied)</em></a>";
+	    if [[ $? -eq "0" ]]; then
+		if [[ $msg = '' ]]; then
+		    echo "<li><a href=\"https://github.com/jessealama/$name/$commit\"><em>(no message was supplied)</em></a>";
+		else
+		    echo "<li><a href=\"https://github.com/jessealama/$name/commits/$commit\">$msg</a></li>";
+		fi;
 	    else
-		echo "<li><a href=\"https://github.com/jessealama/$name/commits/$commit\">$msg</a></li>";
-	    fi;
+		echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
+	    fi
 	done
     else
 	echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
