@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmode mizar/mwiki";
+repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmode mizar/mwiki dialogues polyhedra";
 
 for repo in $repos; do
     name=`basename $repo`;
