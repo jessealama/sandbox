@@ -18,10 +18,12 @@ for repo in $repos; do
 		fi;
 	    else
 		echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
+		exit 1;
 	    fi
 	done
     else
 	echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
+	exit 1;
     fi
 done
 
