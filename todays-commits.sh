@@ -5,7 +5,7 @@ repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmo
 for repo in $repos; do
     name=`basename $repo`;
     path=/Users/alama/sources/$repo;
-    commits=`git --git-dir=$path/.git log --since yesterday | grep ^commit | cut -f 2 -d ' '`;
+    commits=`git --git-dir=$path/.git log --branches='*' --since yesterday | grep ^commit | cut -f 2 -d ' '`;
     if [[ $? -eq "0" ]]; then
 	for commit in $commits; do
 	    msg=`git --git-dir=$path/.git diff-tree -s --pretty=%s $commit`;
