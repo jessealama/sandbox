@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmode mizar/mwiki dialogues polyhedra";
+repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmode mizar/mwiki dialogues polyhedra dotemacs";
 github="https://github.com/jessealama";
 
 for repo in $repos; do
