@@ -1,6 +1,14 @@
 #!/bin/bash -
 
-repos="hunchentoot-utils sandbox mizar/mizar-items mizar/xsl4mizar mizar/mizarmode mizar/mwiki dialogues polyhedra dotemacs";
+repos="hunchentoot-utils 
+       sandbox           
+       mizar/mizar-items 
+       mizar/xsl4mizar   
+       mizar/mizarmode   
+       mizar/mwiki       
+       dialogues         
+       polyhedra         
+       dotemacs";
 github="https://github.com/jessealama";
 
 # first, fetch (but don't pull) any new commits 
