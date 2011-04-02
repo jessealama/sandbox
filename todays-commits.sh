@@ -29,9 +29,9 @@ done
 echo "done.";
 
 if [ ! "$cannot_fetch" = "" ]; then # something went wrong
-    echo "Unable to fetch any new commits from github for the repos:";
-    echo "  $cannot_fetch";
-    echo "The following information may not accurately reflect your latest work."
+    echo "WARNING: Unable to fetch any new commits from github for the repos:" 1>&2;
+    echo "WARNING:  $cannot_fetch" 1>&2;
+    echo "WARNING: The following information may not accurately reflect your latest work." 1>&2;
 fi
 
 # now check for any uncommitted changes
@@ -52,9 +52,9 @@ for repo in $repos; do
 done
 
 if [ ! "$uncommitted" = "" ]; then
-    echo "There are uncommitted changes in the following repositories:"
-    echo "  $uncommitted";
-    echo "To proceed, please commit or stash your changes."
+    echo "WARNING: There are uncommitted changes in the following repositories:" 1>&2;
+    echo "WARNING:  $uncommitted" 1>&2;
+    echo "WARNING: To proceed, please commit or stash your changes." 1>&2;
     exit 1;
 fi
 
