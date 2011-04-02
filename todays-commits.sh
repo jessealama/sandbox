@@ -57,21 +57,25 @@ for repo in $repos; do
     commits=`git --git-dir=$path/.git log --branches='*' --since yesterday | grep ^commit | cut -f 2 -d ' '`;
     if [ $? -eq "0" ]; then
 	echo "<dt>$name</dt>";
-	for commit in $commits; do
-	    msg=`git --git-dir=$path/.git diff-tree -s --pretty=%s $commit`;
-	    if [ $? -eq "0" ]; then
-		echo -n "<dd>";
-		if [[ $msg = "" ]]; then
-		    echo -n "<a href=\"$github/$name/$commit\"><em>(no message was supplied)</em></a>";
+	if [ "$commits" = "" ]; then
+	    echo "<dd><em>(no activity in this repository)</em></dd>";
+	else
+	    for commit in $commits; do
+		msg=`git --git-dir=$path/.git diff-tree -s --pretty=%s $commit`;
+		if [ $? -eq "0" ]; then
+		    echo -n "<dd>";
+		    if [[ $msg = "" ]]; then
+			echo -n "<a href=\"$github/$name/$commit\"><em>(no message was supplied)</em></a>";
+		    else
+			echo -n "<a href=\"$github/$name/commits/$commit\">$msg</a>";
+		    fi;
+		    echo "</dd>";
 		else
-		    echo -n "<a href=\"$github/$name/commits/$commit\">$msg</a>";
-		fi;
-		echo "</dd>";
-	    else
-		echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
-		exit 1;
-	    fi
-	done
+		    echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
+		    exit 1;
+		fi
+	    done
+	fi
     else
 	echo "Uh oh: something went wrong calling git on the repo '$repo', with name '$name', at '$path'";
 	exit 1;
