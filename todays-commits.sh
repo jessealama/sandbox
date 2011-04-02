@@ -56,7 +56,7 @@ for repo in $repos; do
     path=/Users/alama/sources/$repo;
     commits=`git --git-dir=$path/.git log --branches='*' --since yesterday | grep ^commit | cut -f 2 -d ' '`;
     if [ $? -eq "0" ]; then
-	echo "<dt>$name</dt>";
+	echo "<dt><tt><a href='$github/$name'>$name</a></tt></dt>";
 	if [ "$commits" = "" ]; then
 	    echo "<dd><em>(no activity in this repository)</em></dd>";
 	else
