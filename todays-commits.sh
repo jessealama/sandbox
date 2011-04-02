@@ -50,6 +50,7 @@ if [ ! "$uncommitted" = "" ]; then
     exit 1;
 fi
 
+echo "<ul>";
 for repo in $repos; do
     name=`basename $repo`;
     path=/Users/alama/sources/$repo;
@@ -73,5 +74,6 @@ for repo in $repos; do
 	exit 1;
     fi
 done
+echo "</ul>";
 
 exit 0;
