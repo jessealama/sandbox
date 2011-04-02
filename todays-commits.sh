@@ -64,7 +64,7 @@ for repo in $repos; do
 		msg=`git --git-dir=$path/.git diff-tree -s --pretty=%s $commit`;
 		if [ $? -eq "0" ]; then
 		    echo -n "<dd>";
-		    if [[ $msg = "" ]]; then
+		    if [ "$msg" = "" ]; then
 			echo -n "<a href=\"$github/$name/$commit\"><em>(no message was supplied)</em></a>";
 		    else
 			echo -n "<a href=\"$github/$name/commits/$commit\">$msg</a>";
