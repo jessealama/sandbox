@@ -26,6 +26,30 @@ if [ ! "$cannot_fetch" = "" ]; then # something went wrong
     echo "The following information may not accurately reflect your latest work."
 fi
 
+# now check for any uncommitted changes
+
+uncommitted="";
+
+for repo in $repos; do
+    path=/Users/alama/sources/$repo;
+    cd $path;
+    changed=`git status --short --ignore-submodules`;
+#                               ^^^^^^^^^^^^^^^^^^^
+#                               submodules are either our own work, which is
+#                               already being tracked, or the work of others,
+#                               which we are not interested in tracking
+    if [ ! "$changed" = "" ]; then
+	uncommitted="$repo $uncommitted";
+    fi
+done
+
+if [ ! "$uncommitted" = "" ]; then
+    echo "There are uncommitted changes in the following repositories:"
+    echo "  $uncommitted";
+    echo "To proceed, please commit or stash your changes."
+    exit 1;
+fi
+
 for repo in $repos; do
     name=`basename $repo`;
     path=/Users/alama/sources/$repo;
