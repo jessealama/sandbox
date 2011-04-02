@@ -10,7 +10,6 @@ cannot_fetch=""; # repos from which we cannot fetch the latest commits
 echo -n "Fetching new commits...";
 
 for repo in $repos; do
-    name=`basename $repo`;
     path=/Users/alama/sources/$repo;
     git --git-dir=$path/.git fetch --quiet origin > /dev/null 2>&1
     fetch_exit_code=$?;
