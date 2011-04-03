@@ -8,7 +8,8 @@ repos="hunchentoot-utils
        mizar/mwiki       
        dialogues         
        polyhedra         
-       dotemacs";
+       dotemacs
+       finkinfo";
 github="https://github.com/jessealama";
 
 # first, fetch (but don't pull) any new commits 
