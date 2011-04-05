@@ -42,7 +42,7 @@ uncommitted="";
 for repo in $repos; do
     path=/Users/alama/sources/$repo;
     cd $path;
-    changed=`git status --short --ignore-submodules`;
+    changed=`git status --short --ignore-submodules --untracked-files=no`;
 #                               ^^^^^^^^^^^^^^^^^^^
 #                               submodules are either our own work, which is
 #                               already being tracked, or the work of others,
