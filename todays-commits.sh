@@ -12,7 +12,24 @@ repos="hunchentoot-utils
        finkinfo";
 github="https://github.com/jessealama";
 
-# first, fetch (but don't pull) any new commits 
+# first check for any uncommitted changes
+
+uncommitted="";
+
+for repo in $repos; do
+    path=/Users/alama/sources/$repo;
+    cd $path;
+    changed=`git status --short --ignore-submodules --untracked-files=no`;
+#                               ^^^^^^^^^^^^^^^^^^^
+#                               submodules are either our own work, which is
+#                               already being tracked, or the work of others,
+#                               which we are not interested in tracking
+    if [ ! "$changed" = "" ]; then
+	uncommitted="$repo $uncommitted";
+    fi
+done
+
+# now fetch (but don't pull) any new commits 
 
 cannot_fetch=""; # repos from which we cannot fetch the latest commits
 
@@ -34,23 +51,6 @@ if [ ! "$cannot_fetch" = "" ]; then # something went wrong
     echo "WARNING:  $cannot_fetch" 1>&2;
     echo "WARNING: The following information may not accurately reflect your latest work." 1>&2;
 fi
-
-# now check for any uncommitted changes
-
-uncommitted="";
-
-for repo in $repos; do
-    path=/Users/alama/sources/$repo;
-    cd $path;
-    changed=`git status --short --ignore-submodules --untracked-files=no`;
-#                               ^^^^^^^^^^^^^^^^^^^
-#                               submodules are either our own work, which is
-#                               already being tracked, or the work of others,
-#                               which we are not interested in tracking
-    if [ ! "$changed" = "" ]; then
-	uncommitted="$repo $uncommitted";
-    fi
-done
 
 if [ ! "$uncommitted" = "" ]; then
     echo "WARNING: There are uncommitted changes in the following repositories:" 1>&2;
