@@ -29,6 +29,13 @@ for repo in $repos; do
     fi
 done
 
+if [ ! "$uncommitted" = "" ]; then
+    echo "WARNING: There are uncommitted changes in the following repositories:" 1>&2;
+    echo "WARNING:  $uncommitted" 1>&2;
+    echo "WARNING: To proceed, please commit or stash your changes." 1>&2;
+    exit 1;
+fi
+
 # now fetch (but don't pull) any new commits 
 
 cannot_fetch=""; # repos from which we cannot fetch the latest commits
@@ -50,13 +57,6 @@ if [ ! "$cannot_fetch" = "" ]; then # something went wrong
     echo "WARNING: Unable to fetch any new commits from github for the repos:" 1>&2;
     echo "WARNING:  $cannot_fetch" 1>&2;
     echo "WARNING: The following information may not accurately reflect your latest work." 1>&2;
-fi
-
-if [ ! "$uncommitted" = "" ]; then
-    echo "WARNING: There are uncommitted changes in the following repositories:" 1>&2;
-    echo "WARNING:  $uncommitted" 1>&2;
-    echo "WARNING: To proceed, please commit or stash your changes." 1>&2;
-    exit 1;
 fi
 
 echo "<dl>";
