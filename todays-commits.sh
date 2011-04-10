@@ -40,7 +40,7 @@ fi
 
 cannot_fetch=""; # repos from which we cannot fetch the latest commits
 
-echo -n "Fetching new commits...";
+echo -n "Fetching any unseen commits from github...";
 
 for repo in $repos; do
     path=/Users/alama/sources/$repo;
